@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  postgres:
+    container_name: pg_database
+    image: "kartoza/postgis"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASS=postgres
+      - POSTGRES_DBNAME=Test
+    ports:
+      - "5432:5432"
+
+  pgAdmin:
+    container_name: pg_admin
+    image: "dpage/pgadmin4"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@user.com
+      - PGADMIN_DEFAULT_PASSWORD=user
+    ports:
+      - "80:80"
+
+volumes:
+  pgdata:
