@@ -1,11 +1,26 @@
-version: "3"
+version: "2.1"
 
 services:
+  nodejs:
+    build: .
+    image: node:10.15.3-alpine
+    container_name: node_js
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_PORT=3000
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    command: npm start
+    depends_on:
+      - postgres
+
   postgres:
     container_name: pg_database
     image: "kartoza/postgis"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgis-data:/var/lib/postgresql
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASS=postgres
@@ -23,4 +38,4 @@ services:
       - "80:80"
 
 volumes:
-  pgdata:
+  postgis-data:
