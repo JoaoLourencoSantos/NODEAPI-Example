@@ -31,11 +31,20 @@ services:
   pgAdmin:
     container_name: pg_admin
     image: "dpage/pgadmin4"
+    volumes:
+      - pgadmin:/root/.pgadmin
+    networks:
+      - postgres
     environment:
       - PGADMIN_DEFAULT_EMAIL=user@user.com
       - PGADMIN_DEFAULT_PASSWORD=user
     ports:
       - "80:80"
 
+networks:
+  postgres:
+    driver: bridge
+
 volumes:
   postgis-data:
+  pgadmin:
