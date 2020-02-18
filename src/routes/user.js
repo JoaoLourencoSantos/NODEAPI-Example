@@ -7,8 +7,10 @@ router.get("/teste", (req, res) => {
   res.send(new Response(404, "Error", null));
 });
 
-router.post("/create", UserController.store);
-router.get("/find/:id", UserController.findOne);
 router.get("/find/", UserController.findAll);
+router.get("/find/:id", UserController.findOne);
+router.post("/create", UserController.store);
+router.put("/update", UserController.update);
+router.delete("/delete/:id", UserController.delete);
 
 module.exports = router;

@@ -2,6 +2,22 @@ const { User } = require("../models");
 const Response = require("../dtos/Response");
 
 class UserController {
+  async findAll(req, res) {
+    const users = await User.findAll();
+
+    return res.json(new Response(201, "Usuários encontrados", users));
+  }
+
+  async findOne(req, res) {
+    const user = await User.findByPk(req.params.id);
+
+    if (!user) {
+      return res.json(new Response(404, "Usuário não encontrado!", null));
+    }
+
+    return res.json(new Response(201, "Usuário encontrado", user));
+  }
+
   async store(req, res) {
     const { email, cpf } = req.body;
 
@@ -15,20 +31,24 @@ class UserController {
     return res.send(await User.create(req.body));
   }
 
-  async findOne(req, res) {
-    const user = await User.findByPk(req.params.id);
-
-    if (!user) {
-      return res.json(new Response(404, "Usuário não encontrado!", null));
-    }
-
-    return res.json(new Response(201, "Usuário encontrado", user));
+  async update(req, res) {
+    await User.update(req.body, { returning: true, where: { id: req.body.id } })
+      .then(user => {
+        res.json(new Response(201, "Usuário atualizado", user));
+      })
+      .catch(error => {
+        res.json(new Response(500, "Usuário não atualizado", null));
+      });
   }
 
-  async findAll(req, res) {
-    const users = await User.findAll();
-
-    return res.json(new Response(201, "Usuários encontrados", users));
+  async delete(req, res) {
+    await User.destroy({ where: { id: req.params.id } })
+      .then(user => {
+        res.json(new Response(201, `Usuários deletados ${user}`, null));
+      })
+      .catch(error => {
+        res.json(new Response(500, "Usuário não deletado", null));
+      });
   }
 }
 
