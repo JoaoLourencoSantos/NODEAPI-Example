@@ -43,8 +43,8 @@ class UserController {
 
   async delete(req, res) {
     await User.destroy({ where: { id: req.params.id } })
-      .then(user => {
-        res.json(new Response(201, `Usuários deletados ${user}`, null));
+      .then(rows => {
+        res.json(new Response(201, `Dados deletados ${user}`, rows));
       })
       .catch(error => {
         res.json(new Response(500, "Usuário não deletado", null));
