@@ -3,19 +3,23 @@ const Response = require("../dtos/Response");
 
 class UserController {
   async findAll(req, res) {
-    const users = await User.findAll();
-
-    return res.json(new Response(201, "Usuários encontrados", users));
+    await User.findAll()
+      .then(users => {
+        res.json(new Response(201, "Usuários encontrados", users));
+      })
+      .catch(error => {
+        res.json(new Response(404, "Usuário não encontrado!", null));
+      });
   }
 
   async findOne(req, res) {
-    const user = await User.findByPk(req.params.id);
-
-    if (!user) {
-      return res.json(new Response(404, "Usuário não encontrado!", null));
-    }
-
-    return res.json(new Response(201, "Usuário encontrado", user));
+    await User.findByPk(req.params.id)
+      .then(user => {
+        res.json(new Response(201, "Usuário encontrado", user));
+      })
+      .catch(error => {
+        res.json(new Response(404, "Usuário não encontrado!", null));
+      });
   }
 
   async store(req, res) {
@@ -28,7 +32,13 @@ class UserController {
       return res.send(new Response(404, "Usuário já está cadastrado!", null));
     }
 
-    return res.send(await User.create(req.body));
+    await User.create(req.body)
+      .then(user => {
+        res.json(new Response(201, "Usuário criado", user));
+      })
+      .catch(error => {
+        res.json(new Response(500, "Usuário não atualizado", null));
+      });
   }
 
   async update(req, res) {
