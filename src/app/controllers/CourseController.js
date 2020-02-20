@@ -60,6 +60,18 @@ class CourseController {
         res.json(new Response(500, "O curso não pode ser atualizado", null));
       });
   }
+
+  async delete(req, res) {
+    await Course.destroy({ where: { id: req.params.id } })
+      .then(rows => {
+        res.json(
+          new Response(200, ` ${rows} curso foi deletado com sucesso`, null)
+        );
+      })
+      .catch(error => {
+        res.json(new Response(500, "O curso não pode ser deletado", null));
+      });
+  }
 }
 
 module.exports = new CourseController();

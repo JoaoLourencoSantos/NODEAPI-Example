@@ -11,5 +11,6 @@ router.get("/find", CourseController.findAll);
 router.get("/find/:id", CourseController.findOne);
 router.post("/create", CourseController.store);
 router.put("/update", CourseController.update);
+router.delete("/delete", CourseController.delete);
 
 module.exports = router;
