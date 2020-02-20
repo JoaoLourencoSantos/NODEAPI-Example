@@ -17,6 +17,7 @@ class App {
 
   routes() {
     this.express.use("/api/user", require("./routes/user"));
+    this.express.use("/api/course", require("./routes/course"));
   }
 }
 

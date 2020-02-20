@@ -9,7 +9,8 @@ module.exports = (sequelize, Datatypes) => {
       password: Datatypes.VIRTUAL,
       password_hash: Datatypes.STRING,
       date_birth: Datatypes.DATE,
-      cpf: Datatypes.STRING
+      cpf: Datatypes.STRING,
+      fk_course: Datatypes.INTEGER
     },
     {
       hooks: {
@@ -21,6 +22,10 @@ module.exports = (sequelize, Datatypes) => {
       }
     }
   );
+
+  User.associate = function(models) {
+    User.belongsTo(models.Course, { foreignKey: "fk_course", as: "course" });
+  };
 
   return User;
 };
