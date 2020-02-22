@@ -4,7 +4,8 @@
     "version": "1.0.0",
     "description": "Api voltada para testes, contendo endpoints bases para usuários e cursos ",
     "contact": {
-      "name": "https://github.com/JoaoLourencoSantos"
+      "name": "GitHub",
+      "url": "https://github.com/JoaoLourencoSantos"
     },
     "servers": [
       "http://localhost:3000/api"
