@@ -9,8 +9,8 @@ router.get("/teste", (req, res) => {
 
 router.get("/find", CourseController.findAll);
 router.get("/find/:id", CourseController.findOne);
-router.post("/create", CourseController.store);
+router.post("/store", CourseController.store);
 router.put("/update", CourseController.update);
-router.delete("/delete/:id", CourseController.delete);
+router.delete("/destroy/:id", CourseController.destroy);
 
 module.exports = router;

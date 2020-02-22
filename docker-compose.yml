@@ -1,17 +1,19 @@
-version: "2.1"
+version: "3"
 
 services:
   nodejs:
-    build: .
-    image: node:10.15.3-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: node_js
+    image: node:10.15.3-alpine
     ports:
       - 3000:3000
     environment:
       - NODE_PORT=3000
     volumes:
-      - .:/usr/app/
-      - /usr/app/node_modules
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
     command: npm start
     depends_on:
       - postgres
@@ -48,3 +50,4 @@ networks:
 volumes:
   postgis-data:
   pgadmin:
+  node_modules:

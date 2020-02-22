@@ -9,8 +9,8 @@ router.get("/teste", (req, res) => {
 
 router.get("/find/", UserController.findAll);
 router.get("/find/:id", UserController.findOne);
-router.post("/create", UserController.store);
+router.post("/store", UserController.store);
 router.put("/update", UserController.update);
-router.delete("/delete/:id", UserController.delete);
+router.delete("/destroy/:id", UserController.destroy);
 
 module.exports = router;
