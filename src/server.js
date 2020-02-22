@@ -15,14 +15,14 @@ class App {
   middlewares() {
     this.express.use(bodyParser.urlencoded({ extended: true }));
     this.express.use(bodyParser.json());
-  }
-
-  routes() {
     this.express.use(
       "/api-docs",
       swaggerUi.serve,
       swaggerUi.setup(swaggerConfig)
     );
+  }
+
+  routes() {
     this.express.use("/api/user", require("./routes/user"));
     this.express.use("/api/course", require("./routes/course"));
   }
