@@ -1,0 +1,511 @@
+{
+  "info": {
+    "title": "Minha primeira aplicação em Node JS",
+    "version": "1.0.0",
+    "description": "Api voltada para testes, contendo endpoints bases para usuários e cursos ",
+    "contact": {
+      "name": "https://github.com/JoaoLourencoSantos"
+    },
+    "servers": [
+      "http://localhost:3000/api"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "consumes": [
+      "application/json"
+    ]
+  },
+  "host": "localhost:3000/api",
+  "basePath": "/",
+  "swagger": "2.0",
+  "paths": {
+    "/user/find": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Buscar todos os usuários",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/responses/ResponseUserSucess"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/responses/ResponseError"
+            }
+          }
+        }
+      }
+    },
+    "/user/find/:id": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Buscar um usuário por sua key",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "params",
+            "description": "Chave primária do usuário",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/responses/ResponseUserSucess"
+            },
+            "500": {
+              "description": "Internal Error",
+              "schema": {
+                "$ref": "#/responses/ResponseError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/store": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Inserir um novo usuário",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/responses/ResponseUserSucess"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/responses/ResponseError"
+            }
+          }
+        }
+      }
+    },
+    "/user/update": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "description": "Atualizar um usuário usuário",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/FullUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/responses/ResponseUserSucess"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/responses/ResponseError"
+            }
+          }
+        }
+      }
+    },
+    "/user/destroy/:id": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "description": "Deletar um usuário por sua key",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "params",
+            "description": "Chave primária do usuário",
+            "schema": {
+              "type": "int",
+              "format": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/responses/ResponseDelete"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/responses/ResponseError"
+            }
+          }
+        }
+      }
+    },
+    "/course/find": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "description": "Buscar todos os cursos",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/responses/ResponseCourseSucess"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/responses/ResponseError"
+            }
+          }
+        }
+      }
+    },
+    "/course/find/:id": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "description": "Buscar um curso por sua key",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "params",
+            "description": "Chave primária do curso",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/responses/ResponseCourseSucess"
+            },
+            "500": {
+              "description": "Internal Error",
+              "schema": {
+                "$ref": "#/responses/ResponseError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/course/store": {
+      "post": {
+        "tags": [
+          "Course"
+        ],
+        "description": "Inserir um novo curso",
+        "parameters": [
+          {
+            "name": "course",
+            "in": "body",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/Course"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/responses/ResponseCourseSucess"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/responses/ResponseError"
+            }
+          }
+        }
+      }
+    },
+    "/course/update": {
+      "put": {
+        "tags": [
+          "Course"
+        ],
+        "description": "Atualizar um curso usuário",
+        "parameters": [
+          {
+            "name": "course",
+            "in": "body",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/FullCourse"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/responses/ResponseCourseSucess"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/responses/ResponseError"
+            }
+          }
+        }
+      }
+    },
+    "/course/destroy/:id": {
+      "delete": {
+        "tags": [
+          "Course"
+        ],
+        "description": "Deletar um curso por sua key",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "params",
+            "description": "Chave primária do curso",
+            "schema": {
+              "type": "int",
+              "format": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/responses/ResponseDelete"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/responses/ResponseError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "required": [
+        "name",
+        "cpf",
+        "email",
+        "password"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "João"
+        },
+        "cpf": {
+          "type": "string",
+          "example": "12618518855"
+        },
+        "email": {
+          "type": "string",
+          "example": "joaom@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "teste"
+        },
+        "fk_course": {
+          "type": "int",
+          "example": "1"
+        },
+        "date_birth": {
+          "type": "Date",
+          "example": "2020-02-15T15:17:30.131Z"
+        }
+      }
+    },
+    "FullUser": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "int",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "João"
+        },
+        "cpf": {
+          "type": "string",
+          "example": "12618518855"
+        },
+        "email": {
+          "type": "string",
+          "example": "joaom@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "teste"
+        },
+        "fk_course": {
+          "type": "int",
+          "example": "1"
+        },
+        "date_birth": {
+          "type": "Date",
+          "example": "2020-02-15T15:17:30.131Z"
+        }
+      }
+    },
+    "Course": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Node js"
+        },
+        "price": {
+          "type": "float",
+          "example": 195.50
+        }
+      }
+    },
+    "FullCourse": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "int",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "Node js"
+        },
+        "price": {
+          "type": "float",
+          "example": 195.50
+        }
+      }
+    }
+  },
+  "responses": {
+    "ResponseUserSucess": {
+      "properties": {
+        "sucess": {
+          "type": "boolean"
+        },
+        "body": {
+          "type": "object",
+          "$ref": "#/definitions/User"
+        },
+        "message": {
+          "type": "string",
+          "example": "OK"
+        }
+      }
+    },
+    "ResponseCourseSucess": {
+      "properties": {
+        "sucess": {
+          "type": "boolean"
+        },
+        "body": {
+          "type": "object",
+          "$ref": "#/definitions/Course"
+        },
+        "message": {
+          "type": "string",
+          "example": "OK"
+        }
+      }
+    },
+    "ResponseError": {
+      "properties": {
+        "sucess": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "body": {
+          "type": "object",
+          "example": "null"
+        },
+        "message": {
+          "type": "string",
+          "example": "Internal Error"
+        }
+      }
+    },
+    "ResponseDelete": {
+      "properties": {
+        "sucess": {
+          "type": "boolean",
+          "example": "true"
+        },
+        "body": {
+          "type": "object",
+          "example": "null"
+        },
+        "message": {
+          "type": "string",
+          "example": "Numero de deleções = 1"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "User",
+      "description": "Tudo sobre os usuários"
+    },
+    {
+      "name": "Course",
+      "description": "Tudo sobre os cursos"
+    }
+  ]
+}
