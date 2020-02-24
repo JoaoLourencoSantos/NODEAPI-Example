@@ -1,4 +1,4 @@
-version: "3"
+version: "3.3"
 
 services:
   nodejs:
@@ -22,7 +22,7 @@ services:
     container_name: pg_database
     image: "kartoza/postgis"
     volumes:
-      - postgis-data:/var/lib/postgresql
+      - postgis-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASS=postgres
@@ -34,7 +34,7 @@ services:
     container_name: pg_admin
     image: "dpage/pgadmin4"
     volumes:
-      - pgadmin:/root/.pgadmin
+      - pgadmin:/root/.pgadmin/data
     networks:
       - postgres
     environment:
