@@ -12,8 +12,8 @@ services:
     environment:
       - NODE_PORT=3000
     volumes:
-      - .:/usr/src/app
-      - node_modules:/usr/src/app/node_modules
+      - .:/usr/app/
+      - /usr/app/node_modules
     command: npm start
     depends_on:
       - postgres
