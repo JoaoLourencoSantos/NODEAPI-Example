@@ -1,4 +1,6 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("../../config/auth");
 
 module.exports = (sequelize, Datatypes) => {
   const User = sequelize.define(
@@ -25,6 +27,16 @@ module.exports = (sequelize, Datatypes) => {
 
   User.associate = function(models) {
     User.belongsTo(models.Course, { foreignKey: "fk_course", as: "course" });
+  };
+
+  User.prototype.checkPassword = function(password) {
+    return bcrypt.compare(password, this.password_hash);
+  };
+
+  User.buildToken = function(id) {
+    return jwt.sign({ id }, config.secret, {
+      expiresIn: config.ttl
+    });
   };
 
   return User;

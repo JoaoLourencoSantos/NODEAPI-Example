@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const swaggerUi = require("swagger-ui-express");
 const swaggerConfig = require("./swagger");
+const authMiddleware = require("./app/middlewares/auth");
 
 class App {
   constructor() {
@@ -20,11 +21,13 @@ class App {
       swaggerUi.serve,
       swaggerUi.setup(swaggerConfig)
     );
+    this.express.use("/api", authMiddleware);
   }
 
   routes() {
     this.express.use("/api/user", require("./routes/user"));
     this.express.use("/api/course", require("./routes/course"));
+    this.express.use("/api/session", require("./routes/auth"));
   }
 }
 

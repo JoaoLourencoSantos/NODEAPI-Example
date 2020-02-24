@@ -1,5 +1,3 @@
-const { Course } = require("../models");
-const Response = require("../dtos/Response");
 const CourseBusiness = require("../business/CourseBusiness");
 
 class CourseController {

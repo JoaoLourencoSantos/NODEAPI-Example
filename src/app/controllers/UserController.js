@@ -1,5 +1,3 @@
-const { User } = require("../models");
-const Response = require("../dtos/Response");
 const UserBusiness = require("../business/UserBusiness");
 
 class UserController {
